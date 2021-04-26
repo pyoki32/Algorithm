@@ -1,22 +1,20 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Sol_17825 {
-	static class Horse{
+	static class Horse {
 		int row;
 		int col;
 		boolean stop;
-		public Horse(int row, int col ,boolean stop) {
-			this.row=row;
-			this.col=col;
-			this.stop=stop;
+
+		public Horse(int row, int col, boolean stop) {
+			this.row = row;
+			this.col = col;
+			this.stop = stop;
 		}
 	}
-		
 		static int[] diceNum ;
 		static int max;
 		static int[][] gameBoard = { 	
@@ -46,24 +44,20 @@ public class Sol_17825 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-
 		diceNum = new int[10];
 		max = Integer.MIN_VALUE;
 		for (int i = 0; i < 10; i++) {
 			diceNum[i] = Integer.parseInt(st.nextToken());
 		}
-		
 		int [] pick = new int[10];
 		pickOrder(pick,0);
 		System.out.println(max);
 	}
 	static void pickOrder(int [] pick,int depth) {
 		 if(depth>9) {
-			max = Math.max(max,move(pick));
-			
+			max = Math.max(max,move(pick));	
 			return;
 		 }
-		
 		for(int i=0;i<4;i++) {
 			pick[depth] = i;
 			pickOrder(pick,depth+1);
@@ -74,12 +68,10 @@ public class Sol_17825 {
 			int point =0;
 			boolean [][]horseCheck = new boolean [22][10];
 			boolean [] commonPath = new boolean[4];
-
 			Horse [] horses = new Horse[4];
 			for(int i =0 ;i<4;i++) {
 				horses[i]= new Horse(0,0,false);	
-			}
-			
+			}	
 			for(int k=0;k<10;k++) {
 				int moveCnt =diceNum[k];
 				int horseNum = pick[k];
@@ -88,10 +80,8 @@ public class Sol_17825 {
 				int col = h.col;
 				boolean stop = h.stop;
 				int nrow = row;
-				int ncol = col;
-				//System.out.println(k+"---->["+horseNum+"]"+row+" "+col);
+				int ncol = col;		
 			if (!stop) {
-				
 				if (row == 5 || row == 10 || row == 15) {
 					ncol = col + moveCnt;
 				} else {
@@ -108,8 +98,7 @@ public class Sol_17825 {
 						 	 int beforeNode = (gameBoard[row][col]/5)-5;
 						 	 commonPath[beforeNode]=false;
 				 		}
-					}
-								
+					}			
 					 if (!horseCheck[nrow][ncol] && gameBoard[nrow][ncol] != 0) {
 						 if(gameBoard[nrow][ncol]==25 || (gameBoard[nrow][ncol]==30 && ncol !=0) || gameBoard[nrow][ncol]==35
 								 || gameBoard[nrow][ncol]==40) {
@@ -128,8 +117,7 @@ public class Sol_17825 {
 							 		}
 							 	 }else {
 							 		 return -1;
-							 	 }
-							 	
+							 	 }	
 						 }						 
 						 else {
 								 horseCheck[row][col]=false;
@@ -139,7 +127,6 @@ public class Sol_17825 {
 								 point+=gameBoard[nrow][ncol];
 						 }
 					}
-					
 					else {
 						return -1;
 					}
@@ -154,17 +141,13 @@ public class Sol_17825 {
 					 	 int beforeNode = (gameBoard[row][col]/5)-5;
 					 	 commonPath[beforeNode]=false;
 			 		}
-				}
-				
-				
+				}		
 			}
 			//stop 주사위를 선택했다는것은  조합이 잘못됬다는 이야기
 			else {
-				return -1;
-					
+				return -1;	
 			}
 		}
-			
 		return point;
 	}
 	static boolean isRange(int nrow ,int ncol) {
