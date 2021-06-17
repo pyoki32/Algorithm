@@ -94,51 +94,33 @@ public class Sol_1593 {
 				int s_idx = s_back - 'a';
 				s_lowercase[s_idx]++;
 			}
-			if(findMayaLetters(s_uppercase,s_lowercase)) answer++;
-			
+			if (findMayaLetters(s_uppercase, s_lowercase))
+				answer++;
+
 			end++;
 		}
-		
-		
+
 		System.out.println(answer);
-		
+
 	}
-	static boolean findMayaLetters(int [] s_uppercase ,int [] s_lowercase) {
-		boolean answerCheck=true;
-		for(Letter l :wAl ) {
+
+	static boolean findMayaLetters(int[] s_uppercase, int[] s_lowercase) {
+		boolean answerCheck = true;
+		for (Letter l : wAl) {
 			char uLcase = l.uLcase;
 			int idx = l.idx;
 			int cnt = l.cnt;
-			if(uLcase =='U') {
-				if(s_uppercase[idx] != cnt) {
-					return false;
-				}	
-			}
-			else {
-				if(s_lowercase[idx] != cnt) {
+			if (uLcase == 'U') {
+				if (s_uppercase[idx] != cnt) {
 					return false;
 				}
-				
+			} else {
+				if (s_lowercase[idx] != cnt) {
+					return false;
+				}
+
 			}
 		}
 		return answerCheck;
-	}
-	
-	
-	
-	
-	static void print(int [] ms_uppercase, int [] ms_lowercase ) {
-		System.out.println("UP");
-		for(int i=0;i<26;i++) {
-			System.out.print(i+"|"+ms_uppercase[i]+" ");
-		}
-		System.out.println();
-		System.out.println("DOWN");
-		for(int i=0;i<26;i++) {
-			System.out.print(i+"|"+ms_lowercase[i]+" ");
-		}
-		System.out.println("-----------");
-		System.out.println("-----------");
-		
 	}
 }
