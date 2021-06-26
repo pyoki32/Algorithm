@@ -25,7 +25,7 @@ public class Sol_카드_짝_맞추기 {
 	static int cardMaxNum;
 
 	public static void main(String[] args) {
-		int[][] board = { {1,0,0,3},{2,0,0,0},{0,0,0,2},{3,0,1,0}};
+		int[][] board = { { 1, 0, 0, 3 }, { 2, 0, 0, 0 }, { 0, 0, 0, 2 }, { 3, 0, 1, 0 } };
 		int r = 1;
 		int c = 0;
 		int answer = solution(board, r, c);
@@ -54,71 +54,51 @@ public class Sol_카드_짝_맞추기 {
 		pickOrder(visited, 1);
 		minCnt = Integer.MAX_VALUE;
 		for (ArrayList<Integer> pickAl : orderNum) {
-//			for(int i=0;i<pickAl.size();i++) {
-//				System.out.print(pickAl.get(i)+" ");
-//			}
-//			System.out.println();
-			calMin(pickAl,board,0,0,0,r,c,false);
-			calMin(pickAl,board,0,0,1,r,c,false);
+			calMin(pickAl, board, 0, 0, 0, r, c, false);
+			calMin(pickAl, board, 0, 0, 1, r, c, false);
 		}
-		
-		
+
 		answer = minCnt;
 		return answer;
 	}
 
-	static void calMin(ArrayList<Integer> pickAl,int[][] board, int totalCnt, int idx, int lowerNum, int r, int c,boolean sameCard) {
-		
+	static void calMin(ArrayList<Integer> pickAl, int[][] board, int totalCnt, int idx, int lowerNum, int r, int c,
+			boolean sameCard) {
+
 		int[][] nextBoard = new int[4][4];
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				nextBoard[i][j] = board[i][j];
 			}
 		}
-		
-		if(idx>cardMaxNum-1)
-		{
-			
+
+		if (idx > cardMaxNum - 1) {
+
 			minCnt = Math.min(minCnt, totalCnt);
 			return;
 		}
-		
 		int targetNum = pickAl.get(idx);
-		//System.out.println("total"+totalCnt+"   idx"+idx+"  taget"+targetNum+"  lower"+lowerNum);
-		//print(nextBoard);
-		
-		if(sameCard) {
-			   Point p = cardPoint.get(targetNum).get(lowerNum);
-			   int cnt = bfs(nextBoard,r,c,p.row,p.col);
-			   
-//			   System.out.println("r,c"+r+","+c+"-->"+p.row+","+p.col+"    cnt->"+cnt);
-//			   System.out.println(totalCnt+" "+cnt+" "+1+"  -->"+(totalCnt+cnt+1));
-			   nextBoard[p.row][p.col]=0;
-			   calMin(pickAl,nextBoard,totalCnt+cnt+1,idx+1,0,p.row,p.col,false);
-			   calMin(pickAl,nextBoard,totalCnt+cnt+1,idx+1,1,p.row,p.col,false);
-			
-			}
-		else {
-			if(lowerNum==0) {
-				 Point p = cardPoint.get(targetNum).get(0);
-				 int cnt = bfs(nextBoard,r,c,p.row,p.col);
-//				 System.out.println("r,c"+r+","+c+"-->"+p.row+","+p.col+"    cnt->"+cnt);
-//				 System.out.println(totalCnt+" "+cnt+" "+1+"  -->"+(totalCnt+cnt+1));
-				 nextBoard[p.row][p.col]=0;
-				 calMin(pickAl,nextBoard,totalCnt+cnt+1,idx,1,p.row,p.col,true);
-				
-			}
-			else {
+		if (sameCard) {
+			Point p = cardPoint.get(targetNum).get(lowerNum);
+			int cnt = bfs(nextBoard, r, c, p.row, p.col);
+			nextBoard[p.row][p.col] = 0;
+			calMin(pickAl, nextBoard, totalCnt + cnt + 1, idx + 1, 0, p.row, p.col, false);
+			calMin(pickAl, nextBoard, totalCnt + cnt + 1, idx + 1, 1, p.row, p.col, false);
+
+		} else {
+			if (lowerNum == 0) {
+				Point p = cardPoint.get(targetNum).get(0);
+				int cnt = bfs(nextBoard, r, c, p.row, p.col);
+				nextBoard[p.row][p.col] = 0;
+				calMin(pickAl, nextBoard, totalCnt + cnt + 1, idx, 1, p.row, p.col, true);
+
+			} else {
 				Point p = cardPoint.get(targetNum).get(1);
-				 int cnt = bfs(nextBoard,r,c,p.row,p.col);
-//				 System.out.println("r,c"+r+","+c+"-->"+p.row+","+p.col+"    cnt->"+cnt);
-//				 System.out.println(totalCnt+" "+cnt+" "+1+"  -->"+(totalCnt+cnt+1));
-				 nextBoard[p.row][p.col]=0;
-				 calMin(pickAl,nextBoard,totalCnt+cnt+1,idx,0,p.row,p.col,true);
-				 
+				int cnt = bfs(nextBoard, r, c, p.row, p.col);
+				nextBoard[p.row][p.col] = 0;
+				calMin(pickAl, nextBoard, totalCnt + cnt + 1, idx, 0, p.row, p.col, true);
 			}
 		}
-
 	}
 
 	static void pickOrder(boolean[] visited, int depth) {
@@ -130,7 +110,6 @@ public class Sol_카드_짝_맞추기 {
 			}
 			return;
 		}
-
 		for (int i = 1; i <= cardMaxNum; i++) {
 			if (!visited[i]) {
 				visited[i] = true;
@@ -139,7 +118,6 @@ public class Sol_카드_짝_맞추기 {
 				visited[i] = false;
 			}
 		}
-
 	}
 
 	static int bfs(int[][] board, int startR, int startC, int endR, int endC) {
@@ -150,14 +128,13 @@ public class Sol_카드_짝_맞추기 {
 				visited[i][j] = Integer.MAX_VALUE;
 			}
 		}
-		visited[startR][startC]=0;
-		
-		if(startR==endR && startC == endC ) {
+		visited[startR][startC] = 0;
+
+		if (startR == endR && startC == endC) {
 			return 0;
 		}
 		Queue<Point> q = new LinkedList<>();
 		q.add(new Point(startR, startC, 0));
-		//print(visited);
 		while (!q.isEmpty()) {
 			Point p = q.poll();
 			int row = p.row;
@@ -183,7 +160,7 @@ public class Sol_카드_짝_맞추기 {
 				}
 			}
 		}
-		int res=visited[endR][endC];
+		int res = visited[endR][endC];
 		return res;
 	}
 
@@ -198,7 +175,6 @@ public class Sol_카드_짝_맞추기 {
 		point[0] = r;
 		point[1] = c;
 		boolean cardCheck = false;
-
 		switch (dir) {
 		// <
 		case 0:

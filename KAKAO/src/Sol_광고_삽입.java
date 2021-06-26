@@ -32,7 +32,6 @@ public class Sol_광고_삽입 {
 				hit_time[j]++;
 			}
 		}
-
 		int adv_time_s = calcul_seconds(adv_time);
 		int answerStart = 0;
 		int hit_cnt = 0;
@@ -43,11 +42,8 @@ public class Sol_광고_삽입 {
 			hit_cnt += hit_time[i];
 		}
 		if (MAX < hit_cnt) {
-			MAX=hit_cnt;
 			answerStart = front;
-
 		}
-
 		while (back < play_time_s) {
 			hit_cnt -= hit_time[front];
 			front++;
@@ -57,11 +53,9 @@ public class Sol_광고_삽입 {
 			if (MAX < hit_cnt) {
 				MAX = hit_cnt;
 				answerStart = front;
-
 			}
 
 		}
-
 		int hour = answerStart / (60 * 60);
 		int minute = answerStart / 60 - (hour * 60);
 		int second = answerStart % 60;
