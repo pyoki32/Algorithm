@@ -25,7 +25,6 @@ class Sol_입국심사 {
 		}
 		answer = low;
 		return answer;
-
 	}
 
 	static long calCnt(long mid, long[] times_long) {
