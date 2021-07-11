@@ -3,7 +3,6 @@ import java.util.Stack;
 public class Sol_표_편집 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int n =8;
 		int k =2;
 		String [] cmd = {"D 2","C","U 3","C","D 4","C","U 2","Z","Z"};
