@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -46,8 +45,6 @@ public class Sol_17086 {
 				 ans = Math.max(ans, bfs(i,j));
 			}
 		}
-		
-			
 		System.out.println(ans);
 	}
 
