@@ -10,24 +10,20 @@ public class Sol_1916 {
     static class City {
         int num;
         int value;
-
         public City(int num, int value) {
             this.num = num;
             this.value = value;
         }
     }
-
     static int N, M;
     static ArrayList<ArrayList<City>> adjList;
     static int[] ans_values;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
         M = Integer.parseInt(st.nextToken());
-
         adjList = new ArrayList<>();
         ans_values = new int[N + 1];
         for (int i = 0; i <= N; i++) {
@@ -74,8 +70,7 @@ public class Sol_1916 {
         while (!pq.isEmpty()) {
             City city = pq.poll();
             int num = city.num;
-            int value = city.num;
-
+            int value = city.value;
             if (value<=ans_values[num]&& !visited[num]) {
                 ans_values[num]=value;
                 visited[num] = true;
@@ -84,12 +79,10 @@ public class Sol_1916 {
                     int next_num = nextCity.num;
                     int next_value = nextCity.value;
                     if (ans_values[next_num] > value + next_value) {
-                        ans_values[next_num] = value + next_value;
                         pq.add(new City(next_num, (value + next_value)));
                     }
                 }
             }
         }
-
     }
 }
