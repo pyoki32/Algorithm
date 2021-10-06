@@ -85,7 +85,6 @@ public class Sol_14891 {
                 }
                 break;
         }
-
     }
 
     static int setIdx(int topIdx) {
