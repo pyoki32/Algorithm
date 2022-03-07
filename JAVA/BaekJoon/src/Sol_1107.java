@@ -16,7 +16,6 @@ public class Sol_1107 {
         M = Integer.parseInt(st.nextToken());
         brokenBtn = new boolean[10];
         minCnt = Math.abs(N - 100);
-        String nStr = String.valueOf(N);
 
         if (M != 0) {
             st = new StringTokenizer(br.readLine());
